@@ -23,8 +23,15 @@ namespace Hakchi_HelpingHand
             tmr.Interval = 500;
             tmr.Tick += Tmr_Tick;
             tmr.Enabled = true;
+            this.FormClosing += ClovershellConsolecs_FormClosing;
             
         }
+
+        private void ClovershellConsolecs_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            conn.Dispose();
+        }
+
         bool oldStatus = false;
         private void Tmr_Tick(object sender, EventArgs e)
         {

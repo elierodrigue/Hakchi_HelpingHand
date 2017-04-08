@@ -38,6 +38,7 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clovershellToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.filebrowserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -119,7 +120,8 @@
             // toolToolStripMenuItem
             // 
             this.toolToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.clovershellToolStripMenuItem});
+            this.clovershellToolStripMenuItem,
+            this.filebrowserToolStripMenuItem});
             this.toolToolStripMenuItem.Name = "toolToolStripMenuItem";
             this.toolToolStripMenuItem.Size = new System.Drawing.Size(42, 20);
             this.toolToolStripMenuItem.Text = "Tool";
@@ -130,6 +132,13 @@
             this.clovershellToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.clovershellToolStripMenuItem.Text = "Clovershell";
             this.clovershellToolStripMenuItem.Click += new System.EventHandler(this.clovershellToolStripMenuItem_Click);
+            // 
+            // filebrowserToolStripMenuItem
+            // 
+            this.filebrowserToolStripMenuItem.Name = "filebrowserToolStripMenuItem";
+            this.filebrowserToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.filebrowserToolStripMenuItem.Text = "Filebrowser";
+            this.filebrowserToolStripMenuItem.Click += new System.EventHandler(this.filebrowserToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -144,7 +153,7 @@
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
-            this.Text = "Hakchi Helping Hand 1.0";
+            this.Text = "Hakchi Helping Hand 1.1";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -164,6 +173,7 @@
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem clovershellToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem filebrowserToolStripMenuItem;
     }
 }
 

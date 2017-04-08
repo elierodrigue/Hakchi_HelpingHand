@@ -49,6 +49,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppTypeCollection.cs" />
+    <Compile Include="CloverFileBrowser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CloverFileBrowser.Designer.cs">
+      <DependentUpon>CloverFileBrowser.cs</DependentUpon>
+    </Compile>
     <Compile Include="ClovershellConsolecs.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -63,6 +69,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="CloverFileBrowser.resx">
+      <DependentUpon>CloverFileBrowser.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ClovershellConsolecs.resx">
       <DependentUpon>ClovershellConsolecs.cs</DependentUpon>
     </EmbeddedResource>

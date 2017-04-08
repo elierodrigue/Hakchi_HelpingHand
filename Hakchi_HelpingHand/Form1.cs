@@ -528,5 +528,11 @@ namespace Hakchi_HelpingHand
             c.ShowDialog();
          
         }
+
+        private void filebrowserToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CloverFileBrowser cfb = new CloverFileBrowser();
+            cfb.ShowDialog();
+        }
     }
 }

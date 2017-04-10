@@ -31,14 +31,47 @@ namespace Hakchi_HelpingHand
             cleanup.RunWorkerCompleted += Cleanup_RunWorkerCompleted;
             fixRom.DoWork += FixRom_DoWork;
             fixRom.RunWorkerCompleted += FixRom_RunWorkerCompleted;
+   
         }
+
 
         private void FixRom_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             AddLog("Fix rom done", null);
             Enable();
         }
+        public static NesMiniApplication FromDirectory(string path, bool ignoreEmptyConfig = false)
+        {
+            var files = Directory.GetFiles(path, "*.desktop", SearchOption.TopDirectoryOnly);
+            if (files.Length == 0)
+                throw new FileNotFoundException("Invalid app folder");
+            var config = File.ReadAllLines(files[0]);
+            string exec = "";
+            foreach (var line in config)
+            {
+                if (line.StartsWith("Exec="))
+                {
+                    exec = line;
+                    break;
+                   
+                 
+                }
+            }
 
+            string command = exec.Substring(5);
+
+            var app = AppTypeCollection.GetAppByExec(command);
+            if (app != null)
+            {
+                var constructor = app.Class.GetConstructor(new Type[] { typeof(string), typeof(bool) });
+                return (NesMiniApplication)constructor.Invoke(new object[] { path, ignoreEmptyConfig });
+            }
+            else
+            {
+                return null;
+            }
+       
+        }
         private void FixRom_DoWork(object sender, DoWorkEventArgs e)
         {
             var games = new List<NesMiniApplication>();
@@ -48,12 +81,12 @@ namespace Hakchi_HelpingHand
             AddLog("Cleanup");
             foreach (var gameDir in gameDirs)
             {
-                try
+               // try
                 {
                     // Removing empty directories without errors
                     try
                     {
-                        var game = NesMiniApplication.FromDirectory(gameDir);
+                        var game = FromDirectory(gameDir);
                         string romfile = GetRomFile(game);
                         if(romfile != "")
                         {
@@ -70,6 +103,16 @@ namespace Hakchi_HelpingHand
                                 AddLog("Fixed rom " + game.Name);
                                 game.Save();
                             }
+                        
+                            if(game.Command.StartsWith("/bin/nes") || game.Command.StartsWith("/bin/clover-kachikachi"))
+                            {
+                                string shouldBeCommand = "/bin/nes /usr/share/games/nes/kachikachi/" + game.Code + "/" + game.Code + ".nes.7z " + NesParam;
+                                if(game.Command != shouldBeCommand)
+                                {
+                                    game.Command = shouldBeCommand;
+                                    game.Save();
+                                }
+                            }
                         }
 
                     }
@@ -79,12 +122,12 @@ namespace Hakchi_HelpingHand
                         Directory.Delete(gameDir, true);
                     }
                 }
-                catch (Exception ex)
+               /* catch (Exception ex)
                 {
 
                     MessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     continue;
-                }
+                }*/
             }
             AddLog("Done loading game list", null);
         }
@@ -375,7 +418,7 @@ namespace Hakchi_HelpingHand
                         if(nm.Command.StartsWith("/bin/clover-kachikachi"))
                         {
                             //Replace with new command
-                            nm.Command = (f + ".7z").Replace(Path.Combine(runningFolder, "games"), AppTypeCollection.GetAppByType(nm.GetType()).DefaultApps[0] + " ").Replace("\\", "/");
+                            nm.Command = (f + ".7z").Replace(Path.Combine(runningFolder, "games"), AppTypeCollection.GetAppByType(nm.GetType()).DefaultApps[0] + " /usr/share/games/nes/kachikachi").Replace("\\", "/");
                         }
                         else
                         {
@@ -404,9 +447,11 @@ namespace Hakchi_HelpingHand
         BackgroundWorker distinguish = new BackgroundWorker();
         BackgroundWorker cleanup = new BackgroundWorker();
         BackgroundWorker fixRom = new BackgroundWorker();
+        BackgroundWorker forceNesCore = new BackgroundWorker();
         private void button1_Click(object sender, EventArgs e)
         {
             Disable();
+            SetNesParam();
             compressWorker.RunWorkerAsync();
         }
 
@@ -421,10 +466,15 @@ namespace Hakchi_HelpingHand
             Disable();
             cleanup.RunWorkerAsync();
         }
-
+        private string NesParam = "";
+       private void SetNesParam()
+        {
+            NesParam = txtNesParam.Text;
+        }
         private void button4_Click(object sender, EventArgs e)
         {
             Disable();
+            SetNesParam();
             fixRom.RunWorkerAsync();
         }
         public string GetRomFile(NesMiniApplication app)
@@ -534,5 +584,6 @@ namespace Hakchi_HelpingHand
             CloverFileBrowser cfb = new CloverFileBrowser();
             cfb.ShowDialog();
         }
+     
     }
 }

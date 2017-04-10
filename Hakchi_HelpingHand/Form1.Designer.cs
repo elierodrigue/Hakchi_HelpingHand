@@ -39,6 +39,8 @@
             this.toolToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clovershellToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.filebrowserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtNesParam = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -66,9 +68,9 @@
             // 
             this.lstLog.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.lstLog.FormattingEnabled = true;
-            this.lstLog.Location = new System.Drawing.Point(0, 271);
+            this.lstLog.Location = new System.Drawing.Point(0, 312);
             this.lstLog.Name = "lstLog";
-            this.lstLog.Size = new System.Drawing.Size(526, 238);
+            this.lstLog.Size = new System.Drawing.Size(526, 160);
             this.lstLog.TabIndex = 4;
             // 
             // button2
@@ -87,7 +89,7 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(502, 52);
             this.button4.TabIndex = 6;
-            this.button4.Text = "4 - Fix rom names";
+            this.button4.Text = "4 - Fix rom names and rebuild NES Command";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -113,7 +115,7 @@
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -129,22 +131,40 @@
             // clovershellToolStripMenuItem
             // 
             this.clovershellToolStripMenuItem.Name = "clovershellToolStripMenuItem";
-            this.clovershellToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.clovershellToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.clovershellToolStripMenuItem.Text = "Clovershell";
             this.clovershellToolStripMenuItem.Click += new System.EventHandler(this.clovershellToolStripMenuItem_Click);
             // 
             // filebrowserToolStripMenuItem
             // 
             this.filebrowserToolStripMenuItem.Name = "filebrowserToolStripMenuItem";
-            this.filebrowserToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.filebrowserToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.filebrowserToolStripMenuItem.Text = "Filebrowser";
             this.filebrowserToolStripMenuItem.Click += new System.EventHandler(this.filebrowserToolStripMenuItem_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(9, 266);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(148, 13);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "NES Command line parameter";
+            // 
+            // txtNesParam
+            // 
+            this.txtNesParam.Location = new System.Drawing.Point(163, 263);
+            this.txtNesParam.Name = "txtNesParam";
+            this.txtNesParam.Size = new System.Drawing.Size(351, 20);
+            this.txtNesParam.TabIndex = 10;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(526, 509);
+            this.ClientSize = new System.Drawing.Size(526, 472);
+            this.Controls.Add(this.txtNesParam);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.lstLog);
@@ -174,6 +194,8 @@
         private System.Windows.Forms.ToolStripMenuItem toolToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem clovershellToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem filebrowserToolStripMenuItem;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtNesParam;
     }
 }
 

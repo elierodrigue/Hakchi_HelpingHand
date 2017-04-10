@@ -83,15 +83,24 @@ namespace Hakchi_HelpingHand
         {
             string command = "ls -al " + path;
             AddLog("->" + command);
-
-
-            var result = conn.ExecuteSimple(command, 5000, true);
-            string[] allLogs = result.Split(new string[] { "\n" }, StringSplitOptions.None);
-            foreach (string s in allLogs)
+            try
             {
-                AddLog(s);
+
+                var result = conn.ExecuteSimple(command, 5000, true);
+                string[] allLogs = result.Split(new string[] { "\n" }, StringSplitOptions.None);
+                foreach (string s in allLogs)
+                {
+                    AddLog(s);
+
+                }
+                return allLogs;
             }
-            return allLogs;
+            catch(Exception exc)
+            {
+                AddLog("Error : " + exc.Message);
+                return new string[] { ""};
+            }
+           
         }
         private void ProcessTreeNode(TreeNode tn)
         {
@@ -135,6 +144,10 @@ namespace Hakchi_HelpingHand
             {
                 ProcessTreeNode(e.Node);
             }
+            else
+            {
+                OpenNode(e.Node);
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -157,18 +170,37 @@ namespace Hakchi_HelpingHand
             
 
         }
-
-        private void button2_Click(object sender, EventArgs e)
+        private void OpenNode(TreeNode tn)
         {
-             if (treeView1.SelectedNode != null && treeView1.SelectedNode.ImageIndex == 0)
-            {
-                    string path = treeView1.SelectedNode.Tag.ToString();
-                   string text = conn.ExecuteSimple("cat " + path, 15000, false);
-                textBox1.Text = text.Replace("\n","\r\n");
-              
+            List<string> imagesExtensions = new List<string>();
+            imagesExtensions.Add(".jpg");
+            imagesExtensions.Add(".gif");
+            imagesExtensions.Add(".png");
 
-                
+            string path = tn.Tag.ToString();
+            string ext = "";
+            try
+            {
+                ext = System.IO.Path.GetExtension(tn.Text);
+            }
+            catch
+            {
+
+            }
+            if (imagesExtensions.Contains(ext))
+            {
+                System.IO.MemoryStream str = new System.IO.MemoryStream();
+                conn.Execute("cat " + path, null, str, null, 15000, false);
+                str.Seek(0, System.IO.SeekOrigin.Begin);
+                pictureBox1.Image = Image.FromStream(str);
+                str.Close();
+            }
+            else
+            {
+                string text = conn.ExecuteSimple("cat " + path, 15000, false);
+                textBox1.Text = text.Replace("\n", "\r\n");
             }
         }
+
     }
 }

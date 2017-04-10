@@ -24,23 +24,23 @@ namespace Hakchi_HelpingHand
             {
                 Class = typeof(com.clusterrr.hakchi_gui.NesGame),
                 Extensions = new string[] {".nes", ".unf", ".unif"},
-                DefaultApps = new string[] {"/bin/nes"},
+                DefaultApps = new string[] {"/usr/bin/clover-kachikachi","/bin/clover-kachikachi","/bin/clover-kachikachi-wr"},
                 Prefix = 'H'
             },
-            new AppInfo
+        /*    new AppInfo
             {
                 Class = typeof(com.clusterrr.hakchi_gui.FdsGame),
                 Extensions = new string[] {".fds"},
                 DefaultApps = new string[] {"/bin/nes"},
                 Prefix = 'D'
 
-            },
+            },*/
             new AppInfo
             {
                 Class = typeof(com.clusterrr.hakchi_gui.NesUGame),
                 Extensions = new string[] {".nes", ".unf", ".unif"},
                 DefaultApps = new string[] {"/bin/nes"},
-                Prefix = 'I'
+                Prefix = 'H'
             },
             new AppInfo
             {

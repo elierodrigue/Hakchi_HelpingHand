@@ -41,6 +41,7 @@
             this.filebrowserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
             this.txtNesParam = new System.Windows.Forms.TextBox();
+            this.gameBrowserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -123,7 +124,8 @@
             // 
             this.toolToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.clovershellToolStripMenuItem,
-            this.filebrowserToolStripMenuItem});
+            this.filebrowserToolStripMenuItem,
+            this.gameBrowserToolStripMenuItem});
             this.toolToolStripMenuItem.Name = "toolToolStripMenuItem";
             this.toolToolStripMenuItem.Size = new System.Drawing.Size(42, 20);
             this.toolToolStripMenuItem.Text = "Tool";
@@ -131,14 +133,14 @@
             // clovershellToolStripMenuItem
             // 
             this.clovershellToolStripMenuItem.Name = "clovershellToolStripMenuItem";
-            this.clovershellToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.clovershellToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.clovershellToolStripMenuItem.Text = "Clovershell";
             this.clovershellToolStripMenuItem.Click += new System.EventHandler(this.clovershellToolStripMenuItem_Click);
             // 
             // filebrowserToolStripMenuItem
             // 
             this.filebrowserToolStripMenuItem.Name = "filebrowserToolStripMenuItem";
-            this.filebrowserToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.filebrowserToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.filebrowserToolStripMenuItem.Text = "Filebrowser";
             this.filebrowserToolStripMenuItem.Click += new System.EventHandler(this.filebrowserToolStripMenuItem_Click);
             // 
@@ -157,6 +159,13 @@
             this.txtNesParam.Name = "txtNesParam";
             this.txtNesParam.Size = new System.Drawing.Size(351, 20);
             this.txtNesParam.TabIndex = 10;
+            // 
+            // gameBrowserToolStripMenuItem
+            // 
+            this.gameBrowserToolStripMenuItem.Name = "gameBrowserToolStripMenuItem";
+            this.gameBrowserToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.gameBrowserToolStripMenuItem.Text = "Game browser";
+            this.gameBrowserToolStripMenuItem.Click += new System.EventHandler(this.gameBrowserToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -196,6 +205,7 @@
         private System.Windows.Forms.ToolStripMenuItem filebrowserToolStripMenuItem;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtNesParam;
+        private System.Windows.Forms.ToolStripMenuItem gameBrowserToolStripMenuItem;
     }
 }
 

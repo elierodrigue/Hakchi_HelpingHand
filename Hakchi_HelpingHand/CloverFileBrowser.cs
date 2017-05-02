@@ -202,5 +202,28 @@ namespace Hakchi_HelpingHand
             }
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (treeView1.SelectedNode != null)
+            {
+                TreeNode toUse = treeView1.SelectedNode;
+                while(toUse.ImageIndex != 1)
+                {
+                    toUse = toUse.Parent;
+                }
+                string path = toUse.Tag.ToString();
+
+                OpenFileDialog ofd = new OpenFileDialog();
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    System.IO.Stream strIn = ofd.OpenFile();
+                    string fileName =System.IO.Path.GetFileName( ofd.FileName);
+                    string command = "cat > " + path + fileName;
+                    conn.Execute(command, strIn, null, null, 30000, true);
+                    ProcessTreeNode(toUse);
+
+                }
+            }
+        }
     }
 }

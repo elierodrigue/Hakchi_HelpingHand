@@ -584,6 +584,11 @@ namespace Hakchi_HelpingHand
             CloverFileBrowser cfb = new CloverFileBrowser();
             cfb.ShowDialog();
         }
-     
+
+        private void gameBrowserToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LiveGameBrowser gb = new LiveGameBrowser();
+            gb.ShowDialog();
+        }
     }
 }

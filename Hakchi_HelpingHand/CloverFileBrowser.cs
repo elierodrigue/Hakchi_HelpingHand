@@ -225,5 +225,11 @@ namespace Hakchi_HelpingHand
                 }
             }
         }
+
+        private void CloverFileBrowser_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            conn.Disconnect();
+            conn.Dispose();
+        }
     }
 }

@@ -70,6 +70,8 @@
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
             "",
+            "find /var/lib/clover/profiles/0/ -type d -empty -delete",
+            "df -h",
             "cat /etc/clover/REGION",
             "cat /etc/preinit",
             "unmount /usr/share/games/nes/kachikachi",

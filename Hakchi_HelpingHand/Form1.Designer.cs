@@ -42,6 +42,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtNesParam = new System.Windows.Forms.TextBox();
             this.gameBrowserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.button5 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -69,7 +70,7 @@
             // 
             this.lstLog.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.lstLog.FormattingEnabled = true;
-            this.lstLog.Location = new System.Drawing.Point(0, 312);
+            this.lstLog.Location = new System.Drawing.Point(0, 393);
             this.lstLog.Name = "lstLog";
             this.lstLog.Size = new System.Drawing.Size(526, 160);
             this.lstLog.TabIndex = 4;
@@ -167,11 +168,22 @@
             this.gameBrowserToolStripMenuItem.Text = "Game browser";
             this.gameBrowserToolStripMenuItem.Click += new System.EventHandler(this.gameBrowserToolStripMenuItem_Click);
             // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(12, 289);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(502, 52);
+            this.button5.TabIndex = 11;
+            this.button5.Text = "5 - Apply cache clearing fix";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(526, 472);
+            this.ClientSize = new System.Drawing.Size(526, 553);
+            this.Controls.Add(this.button5);
             this.Controls.Add(this.txtNesParam);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button4);
@@ -206,6 +218,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtNesParam;
         private System.Windows.Forms.ToolStripMenuItem gameBrowserToolStripMenuItem;
+        private System.Windows.Forms.Button button5;
     }
 }
 

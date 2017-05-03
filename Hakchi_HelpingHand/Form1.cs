@@ -590,5 +590,55 @@ namespace Hakchi_HelpingHand
             LiveGameBrowser gb = new LiveGameBrowser();
             gb.ShowDialog();
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            com.clusterrr.clovershell.ClovershellConnection conn = new com.clusterrr.clovershell.ClovershellConnection() {  Enabled = true };
+            if (!conn.IsOnline)
+            {
+                Application.DoEvents();
+                System.Threading.Thread.Sleep(1000);
+                Application.DoEvents();
+            }
+            if(!conn.IsOnline)
+            { 
+                MessageBox.Show("Nes classic need to be connected");
+            }
+            else
+            {
+                AddLog("Downloading chmenu script", null);
+                System.IO.MemoryStream ms = new MemoryStream();
+                conn.Execute("cat /var/lib/hakchi/rootfs/bin/chmenu", null, ms, null, 15000, false);
+                ms.Seek(0, SeekOrigin.Begin);
+                System.IO.TextReader rdr = new System.IO.StreamReader(ms);
+                string file = rdr.ReadToEnd();
+                
+
+                if(!file.Contains("#CLEANSAVEDGAMEFOLDER"))
+                {
+                    AddLog("Building fixed files", null);
+                    file = file.Replace("overmount_games", "#CLEANSAVEDGAMEFOLDER\nfind /var/lib/clover/profiles/0/ -type d -exec rmdir {} \\;\n#ENDCLEANSAVEDGAMEFOLDER\novermount_games");
+                    AddLog("Uploading fixed files", null);
+                    System.IO.MemoryStream ms2 = new MemoryStream();
+                    System.IO.TextWriter wri = new System.IO.StreamWriter(ms2);
+                    wri.Write(file);
+                    wri.Flush();
+                    ms2.Seek(0, SeekOrigin.Begin);
+                 
+                    string command = "cat > /var/lib/hakchi/rootfs/bin/chmenu";
+                    conn.Execute(command, ms2, null, null, 30000, true);
+                    wri.Close();
+                    AddLog("Done", null);
+                   
+                }
+                else
+                {
+                    AddLog("Cache fix already in place", null);
+                }
+                rdr.Close();
+                conn.Disconnect();
+            }
+           
+        }
     }
 }

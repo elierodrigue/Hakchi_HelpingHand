@@ -61,6 +61,7 @@
             this.Controls.Add(this.treeView1);
             this.Name = "LiveGameBrowser";
             this.Text = "LiveGameBrowser";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LiveGameBrowser_FormClosing_1);
             this.ResumeLayout(false);
 
         }

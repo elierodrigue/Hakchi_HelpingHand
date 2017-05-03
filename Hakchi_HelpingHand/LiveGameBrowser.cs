@@ -151,5 +151,11 @@ namespace Hakchi_HelpingHand
                 getTreenode(e.Node, e.Node.Tag.ToString());
             }
         }
+
+        private void LiveGameBrowser_FormClosing_1(object sender, FormClosingEventArgs e)
+        {
+            conn.Disconnect();
+            conn.Dispose();
+        }
     }
 }

@@ -32,8 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="hakchi">
-      <HintPath>..\..\..\..\..\..\..\hakchi214\hakchi2\hakchi.exe</HintPath>
+    <Reference Include="hakchi, Version=2.0.14.11, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\CleanHakchi\bin\Debug\hakchi.exe</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

@@ -39,10 +39,11 @@
             this.toolToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clovershellToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.filebrowserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gameBrowserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
             this.txtNesParam = new System.Windows.Forms.TextBox();
-            this.gameBrowserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.button5 = new System.Windows.Forms.Button();
+            this.liveScreenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -126,7 +127,8 @@
             this.toolToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.clovershellToolStripMenuItem,
             this.filebrowserToolStripMenuItem,
-            this.gameBrowserToolStripMenuItem});
+            this.gameBrowserToolStripMenuItem,
+            this.liveScreenToolStripMenuItem});
             this.toolToolStripMenuItem.Name = "toolToolStripMenuItem";
             this.toolToolStripMenuItem.Size = new System.Drawing.Size(42, 20);
             this.toolToolStripMenuItem.Text = "Tool";
@@ -145,6 +147,13 @@
             this.filebrowserToolStripMenuItem.Text = "Filebrowser";
             this.filebrowserToolStripMenuItem.Click += new System.EventHandler(this.filebrowserToolStripMenuItem_Click);
             // 
+            // gameBrowserToolStripMenuItem
+            // 
+            this.gameBrowserToolStripMenuItem.Name = "gameBrowserToolStripMenuItem";
+            this.gameBrowserToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.gameBrowserToolStripMenuItem.Text = "Game browser";
+            this.gameBrowserToolStripMenuItem.Click += new System.EventHandler(this.gameBrowserToolStripMenuItem_Click);
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -161,13 +170,6 @@
             this.txtNesParam.Size = new System.Drawing.Size(351, 20);
             this.txtNesParam.TabIndex = 10;
             // 
-            // gameBrowserToolStripMenuItem
-            // 
-            this.gameBrowserToolStripMenuItem.Name = "gameBrowserToolStripMenuItem";
-            this.gameBrowserToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.gameBrowserToolStripMenuItem.Text = "Game browser";
-            this.gameBrowserToolStripMenuItem.Click += new System.EventHandler(this.gameBrowserToolStripMenuItem_Click);
-            // 
             // button5
             // 
             this.button5.Location = new System.Drawing.Point(12, 289);
@@ -177,6 +179,13 @@
             this.button5.Text = "5 - Apply cache clearing fix";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // liveScreenToolStripMenuItem
+            // 
+            this.liveScreenToolStripMenuItem.Name = "liveScreenToolStripMenuItem";
+            this.liveScreenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.liveScreenToolStripMenuItem.Text = "Live Screen";
+            this.liveScreenToolStripMenuItem.Click += new System.EventHandler(this.liveScreenToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -219,6 +228,7 @@
         private System.Windows.Forms.TextBox txtNesParam;
         private System.Windows.Forms.ToolStripMenuItem gameBrowserToolStripMenuItem;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.ToolStripMenuItem liveScreenToolStripMenuItem;
     }
 }
 

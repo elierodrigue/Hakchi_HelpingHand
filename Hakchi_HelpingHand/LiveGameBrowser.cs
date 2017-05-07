@@ -48,6 +48,7 @@ namespace Hakchi_HelpingHand
 
         private void LiveGameBrowser_FormClosing(object sender, FormClosingEventArgs e)
         {
+            conn.Disconnect();
             conn.Dispose();
         }
 

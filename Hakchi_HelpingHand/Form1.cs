@@ -640,5 +640,11 @@ namespace Hakchi_HelpingHand
             }
            
         }
+
+        private void liveScreenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RemoteViewer v = new RemoteViewer();
+            v.Show();
+        }
     }
 }

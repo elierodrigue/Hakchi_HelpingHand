@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Runtime.InteropServices;
 namespace Hakchi_HelpingHand
 {
     public partial class RemoteViewer : Form
@@ -34,30 +35,12 @@ namespace Hakchi_HelpingHand
                 if(conn.IsOnline)
                 {
                     var rawStream = new MemoryStream();
-                    var screenshot = new Bitmap(1280, 720, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+  
                     conn.Execute("cat /dev/fb0", null, rawStream, null, 1000, true);
                     var raw = rawStream.ToArray();
-                    BitmapData data = screenshot.LockBits(new Rectangle(0, 0, screenshot.Width, screenshot.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
-                    int rawOffset = 0;
-                    unsafe
-                    {
-                        for (int y = 0; y < screenshot.Height; ++y)
-                        {
-                            byte* row = (byte*)data.Scan0 + (y * data.Stride);
-                            int columnOffset = 0;
-                            for (int x = 0; x < screenshot.Width; ++x)
-                            {
-                                row[columnOffset] = raw[rawOffset];
-                                row[columnOffset + 1] = raw[rawOffset + 1];
-                                row[columnOffset + 2] = raw[rawOffset + 2];
-
-                                columnOffset += 3;
-                                rawOffset += 4;
-                            }
-                        }
-                    }
-                    screenshot.UnlockBits(data);
-                    pictureBox1.Image = screenshot;
+          
+                    Bitmap bmp = new Bitmap(1280,720, 1280*4, PixelFormat.Format32bppRgb, GCHandle.Alloc(raw, GCHandleType.Pinned).AddrOfPinnedObject());
+                    pictureBox1.Image = bmp;
                 }
                 Application.DoEvents();
             }

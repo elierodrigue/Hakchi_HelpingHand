@@ -17,7 +17,7 @@ namespace Hakchi_HelpingHand
         public ClovershellConsolecs()
         {
             InitializeComponent();
-            conn = new com.clusterrr.clovershell.ClovershellConnection() { AutoReconnect = true, Enabled = true };
+            conn = Form1.conn;
             conn.OnConnected += Conn_OnConnected;
            // conn.ShellEnabled = true;
             tmr.Interval = 500;
@@ -29,8 +29,7 @@ namespace Hakchi_HelpingHand
 
         private void ClovershellConsolecs_FormClosing(object sender, FormClosingEventArgs e)
         {
-            conn.Disconnect();
-            conn.Dispose();
+         
         }
 
         bool oldStatus = false;

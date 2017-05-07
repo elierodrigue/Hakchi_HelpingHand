@@ -19,7 +19,7 @@ namespace Hakchi_HelpingHand
         public RemoteViewer()
         {
             InitializeComponent();
-            conn = new com.clusterrr.clovershell.ClovershellConnection() { AutoReconnect = true, Enabled = true };
+            conn = Form1.conn;
             conn.OnConnected += Conn_OnConnected;
 
             this.FormClosing += RemoteViewer_FormClosing;
@@ -70,8 +70,7 @@ namespace Hakchi_HelpingHand
 
         private void RemoteViewer_FormClosing(object sender, FormClosingEventArgs e)
         {
-            conn.Disconnect();
-            conn.Dispose();
+         
         }
     }
 }

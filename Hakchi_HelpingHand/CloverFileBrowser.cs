@@ -14,11 +14,11 @@ namespace Hakchi_HelpingHand
     {
         com.clusterrr.clovershell.ClovershellConnection conn;// = new com.clusterrr.clovershell.ClovershellConnection();
         Timer tmr = new Timer();
-
+        bool ranOnce = false;
         public CloverFileBrowser()
         {
             InitializeComponent();
-            conn = new com.clusterrr.clovershell.ClovershellConnection() { AutoReconnect = true, Enabled = true };
+            conn = Form1.conn;
             conn.OnConnected += Conn_OnConnected;
             // conn.ShellEnabled = true;
             tmr.Interval = 500;
@@ -34,6 +34,7 @@ namespace Hakchi_HelpingHand
                 if (conn.IsOnline)
                 {
                     AddLog("Connected");
+                    Conn_OnConnected();
                 }
                 else
                 {
@@ -71,13 +72,18 @@ namespace Hakchi_HelpingHand
         }
         private void Conn_OnConnected()
         {
-            AddLog("Connected");
-            TreeNode tn = new TreeNode("root");
-            tn.Tag = "/";
-            tn.ImageIndex = 1;
-            tn.SelectedImageIndex = 1;
-            ProcessTreeNode(tn);
-            AddNode(tn, null);
+            
+            if (!ranOnce)
+            {
+                ranOnce = true;
+                TreeNode tn = new TreeNode("root");
+                tn.Tag = "/";
+                tn.ImageIndex = 1;
+                tn.SelectedImageIndex = 1;
+                ProcessTreeNode(tn);
+                AddNode(tn, null);
+                AddLog("Connected");
+            }
         }
         private string[] listFolder(string path)
         {
@@ -228,8 +234,7 @@ namespace Hakchi_HelpingHand
 
         private void CloverFileBrowser_FormClosing(object sender, FormClosingEventArgs e)
         {
-            conn.Disconnect();
-            conn.Dispose();
+           
         }
     }
 }

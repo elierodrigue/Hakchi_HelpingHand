@@ -17,7 +17,7 @@ namespace Hakchi_HelpingHand
         public LiveGameBrowser()
         {
             InitializeComponent();
-            conn = new com.clusterrr.clovershell.ClovershellConnection() { AutoReconnect = true, Enabled = true };
+            conn = Form1.conn;
             conn.OnConnected += Conn_OnConnected; ;
          
             this.FormClosing += LiveGameBrowser_FormClosing; ;
@@ -155,8 +155,7 @@ namespace Hakchi_HelpingHand
 
         private void LiveGameBrowser_FormClosing_1(object sender, FormClosingEventArgs e)
         {
-            conn.Disconnect();
-            conn.Dispose();
+            
         }
     }
 }

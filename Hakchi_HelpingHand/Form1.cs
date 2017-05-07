@@ -13,6 +13,7 @@ namespace Hakchi_HelpingHand
 {
     public partial class Form1 : Form
     {
+        public static com.clusterrr.clovershell.ClovershellConnection conn = new com.clusterrr.clovershell.ClovershellConnection() { AutoReconnect = true, Enabled = true };
 #if DEBUG
         public static string runningFolder = "c:\\hakchi214\\hakchi2";
 
@@ -31,9 +32,14 @@ namespace Hakchi_HelpingHand
             cleanup.RunWorkerCompleted += Cleanup_RunWorkerCompleted;
             fixRom.DoWork += FixRom_DoWork;
             fixRom.RunWorkerCompleted += FixRom_RunWorkerCompleted;
-   
+            this.FormClosing += Form1_FormClosing;
         }
 
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            conn.Disconnect();
+            conn.Dispose();
+        }
 
         private void FixRom_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {

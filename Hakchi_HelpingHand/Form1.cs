@@ -13,7 +13,8 @@ namespace Hakchi_HelpingHand
 {
     public partial class Form1 : Form
     {
-        public static com.clusterrr.clovershell.ClovershellConnection conn = new com.clusterrr.clovershell.ClovershellConnection() { AutoReconnect = true, Enabled = true };
+        Timer t = new Timer();
+       
 #if DEBUG
         public static string runningFolder = "c:\\hakchi214\\hakchi2";
 
@@ -24,6 +25,11 @@ namespace Hakchi_HelpingHand
         public Form1()
         {
             InitializeComponent();
+            ClovershellWrapper.getInstance().OnConnected += Conn_OnConnected;
+
+            t.Tick += T_Tick;
+            t.Interval = 5000;
+            t.Enabled = true;
             compressWorker.DoWork += CompressWorker_DoWork;
             compressWorker.RunWorkerCompleted += CompressWorker_RunWorkerCompleted;
             distinguish.DoWork += Distinguish_DoWork;
@@ -32,13 +38,82 @@ namespace Hakchi_HelpingHand
             cleanup.RunWorkerCompleted += Cleanup_RunWorkerCompleted;
             fixRom.DoWork += FixRom_DoWork;
             fixRom.RunWorkerCompleted += FixRom_RunWorkerCompleted;
+            backOptimize.DoWork += BackOptimize_DoWork;
+            backOptimize.RunWorkerCompleted += BackOptimize_RunWorkerCompleted;
             this.FormClosing += Form1_FormClosing;
+            progressBar1.Minimum = 0;
+            progressBar1.Maximum = 100;
+        }
+
+    
+
+        private void BackOptimize_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            AddLog("Back folder optimised", null);
+            Enable();
+        }
+
+        private void BackOptimize_DoWork(object sender, DoWorkEventArgs e)
+        {
+            AddLog("Cleaning back folder");
+            /*Find first back folder*/
+            string basepath = "/var/lib/hakchi/rootfs/usr/share/games/nes/kachikachi/";
+        }
+
+        public void RefreshInfo()
+        {
+           
+            string file = ClovershellWrapper.getInstance().GetFileAsString("/var/lib/hakchi/rootfs/bin/chmenu");
+
+            NesClassicInfo ret = new NesClassicInfo();
+            ret.GameClearingFixApplied = file.Contains("#CLEANSAVEDGAMEFOLDER");
+
+            RefreshNESClassicInfoUI(ret, null);
+        }
+        public class NesClassicInfo
+        {
+            public bool GameClearingFixApplied = false;
+        }
+        public void RefreshNESClassicInfoUI(object Infos, EventArgs e)
+        {
+            if(this.InvokeRequired)
+            {
+                this.Invoke(new EventHandler(RefreshNESClassicInfoUI), new object[] { Infos, e });
+            }
+            else
+            {
+                NesClassicInfo param = (NesClassicInfo)Infos;
+                chkGameClearingFix.Checked = param.GameClearingFixApplied;
+            }
+        }
+        private void Conn_OnConnected()
+        {
+            RefreshInfo();
+        }
+
+        private void T_Tick(object sender, EventArgs e)
+        {
+            if (ClovershellWrapper.getInstance().IsOnline())
+            {
+                ClovershellWrapper.DiskSpaceInfo dsi = ClovershellWrapper.getInstance().GetDiskSpaceInfo();
+                txtAvailableSpace.Text = dsi.Used.ToString() + "M/" + dsi.Size.ToString()+"M";
+                progressBar1.Value =(int) dsi.PCT;
+
+
+             
+            }
+            else
+            {
+                progressBar1.Value = 0;
+            }
+          
+
+            //throw new NotImplementedException();
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            conn.Disconnect();
-            conn.Dispose();
+            ClovershellWrapper.getInstance().Disconnect();
         }
 
         private void FixRom_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -454,6 +529,7 @@ namespace Hakchi_HelpingHand
         BackgroundWorker cleanup = new BackgroundWorker();
         BackgroundWorker fixRom = new BackgroundWorker();
         BackgroundWorker forceNesCore = new BackgroundWorker();
+        BackgroundWorker backOptimize = new BackgroundWorker();
         private void button1_Click(object sender, EventArgs e)
         {
             Disable();
@@ -597,60 +673,56 @@ namespace Hakchi_HelpingHand
             gb.ShowDialog();
         }
 
-        private void button5_Click(object sender, EventArgs e)
-        {
-            com.clusterrr.clovershell.ClovershellConnection conn = new com.clusterrr.clovershell.ClovershellConnection() {  Enabled = true };
-            if (!conn.IsOnline)
-            {
-                Application.DoEvents();
-                System.Threading.Thread.Sleep(1000);
-                Application.DoEvents();
-            }
-            if(!conn.IsOnline)
-            { 
-                MessageBox.Show("Nes classic need to be connected");
-            }
-            else
-            {
-                AddLog("Downloading chmenu script", null);
-                System.IO.MemoryStream ms = new MemoryStream();
-                conn.Execute("cat /var/lib/hakchi/rootfs/bin/chmenu", null, ms, null, 15000, false);
-                ms.Seek(0, SeekOrigin.Begin);
-                System.IO.TextReader rdr = new System.IO.StreamReader(ms);
-                string file = rdr.ReadToEnd();
-                
-
-                if(!file.Contains("#CLEANSAVEDGAMEFOLDER"))
-                {
-                    AddLog("Building fixed files", null);
-                    file = file.Replace("overmount_games", "#CLEANSAVEDGAMEFOLDER\nfind /var/lib/clover/profiles/0/ -type d -exec rmdir {} \\;\n#ENDCLEANSAVEDGAMEFOLDER\novermount_games");
-                    AddLog("Uploading fixed files", null);
-                    System.IO.MemoryStream ms2 = new MemoryStream();
-                    System.IO.TextWriter wri = new System.IO.StreamWriter(ms2);
-                    wri.Write(file);
-                    wri.Flush();
-                    ms2.Seek(0, SeekOrigin.Begin);
-                 
-                    string command = "cat > /var/lib/hakchi/rootfs/bin/chmenu";
-                    conn.Execute(command, ms2, null, null, 30000, true);
-                    wri.Close();
-                    AddLog("Done", null);
-                   
-                }
-                else
-                {
-                    AddLog("Cache fix already in place", null);
-                }
-                rdr.Close();
-                conn.Disconnect();
-            }
-           
-        }
+        
 
         private void liveScreenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             RemoteViewer v = new RemoteViewer();
             v.Show();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+
+            if (!ClovershellWrapper.getInstance().IsOnline())
+            {
+                Application.DoEvents();
+                System.Threading.Thread.Sleep(1000);
+                Application.DoEvents();
+            }
+            if (!ClovershellWrapper.getInstance().IsOnline())
+            {
+                MessageBox.Show("Nes classic need to be connected");
+            }
+            else
+            {
+                AddLog("Downloading chmenu script", null);
+
+                string file = ClovershellWrapper.getInstance().GetFileAsString("/var/lib/hakchi/rootfs/bin/chmenu");
+
+
+                if (!file.Contains("#CLEANSAVEDGAMEFOLDER"))
+                {
+                    AddLog("Building fixed files", null);
+                    file = file.Replace("overmount_games", "#CLEANSAVEDGAMEFOLDER\nfind /var/lib/clover/profiles/0/ -type d -exec rmdir {} \\;\n#ENDCLEANSAVEDGAMEFOLDER\novermount_games");
+                    AddLog("Uploading fixed files", null);
+                    ClovershellWrapper.getInstance().UploadFile("/var/lib/hakchi/rootfs/bin/chmenu", file);
+                    AddLog("Done", null);
+
+                }
+                else
+                {
+                    AddLog("Cache fix already in place", null);
+                }
+        
+                RefreshInfo();
+            }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            Disable();
+            backOptimize.RunWorkerAsync();
         }
     }
 }

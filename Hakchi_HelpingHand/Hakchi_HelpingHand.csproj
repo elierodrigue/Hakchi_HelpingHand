@@ -63,6 +63,7 @@
     <Compile Include="ClovershellConsolecs.Designer.cs">
       <DependentUpon>ClovershellConsolecs.cs</DependentUpon>
     </Compile>
+    <Compile Include="ClovershellWrapper.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

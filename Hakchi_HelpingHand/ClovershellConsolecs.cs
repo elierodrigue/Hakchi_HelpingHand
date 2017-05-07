@@ -12,13 +12,13 @@ namespace Hakchi_HelpingHand
 {
     public partial class ClovershellConsolecs : Form
     {
-        com.clusterrr.clovershell.ClovershellConnection conn;// = new com.clusterrr.clovershell.ClovershellConnection();
+ 
         Timer tmr = new Timer();
         public ClovershellConsolecs()
         {
             InitializeComponent();
-            conn = Form1.conn;
-            conn.OnConnected += Conn_OnConnected;
+            ClovershellWrapper.getInstance().OnConnected += Conn_OnConnected;
+          
            // conn.ShellEnabled = true;
             tmr.Interval = 500;
             tmr.Tick += Tmr_Tick;
@@ -35,10 +35,10 @@ namespace Hakchi_HelpingHand
         bool oldStatus = false;
         private void Tmr_Tick(object sender, EventArgs e)
         {
-           if(conn.IsOnline != oldStatus)
+           if (ClovershellWrapper.getInstance().IsOnline() != oldStatus)
             {
-                oldStatus = conn.IsOnline;
-                if(conn.IsOnline)
+                oldStatus = ClovershellWrapper.getInstance().IsOnline();
+                if (ClovershellWrapper.getInstance().IsOnline())
                 {
                     AddLog("Connected");
                 }
@@ -80,8 +80,7 @@ namespace Hakchi_HelpingHand
             AddLog("->" + textBox1.Text);
             try
             {
-                var result = conn.ExecuteSimple(textBox1.Text, 5000, true);
-                string[] allLogs = result.Split(new string[] { "\n" }, StringSplitOptions.None);
+                string[] allLogs = ClovershellWrapper.getInstance().ExecuteConsoleCommand(textBox1.Text);
                 foreach (string s in allLogs)
                 {
                     AddLog(s);

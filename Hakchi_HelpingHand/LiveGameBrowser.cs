@@ -12,25 +12,31 @@ namespace Hakchi_HelpingHand
 {
     public partial class LiveGameBrowser : Form
     {
-        com.clusterrr.clovershell.ClovershellConnection conn;// = new com.clusterrr.clovershell.ClovershellConnection();
-        
+       
+        bool ranOnce = false;
         public LiveGameBrowser()
         {
             InitializeComponent();
-            conn = Form1.conn;
-            conn.OnConnected += Conn_OnConnected; ;
+            ClovershellWrapper.getInstance().OnConnected += Conn_OnConnected; ;
          
             this.FormClosing += LiveGameBrowser_FormClosing; ;
-
+            if(ClovershellWrapper.getInstance().IsOnline())
+            {
+                Conn_OnConnected();
+            }
            
         }
         string basepath = "/var/lib/hakchi/rootfs/usr/share/games/nes/kachikachi/";
         private void Conn_OnConnected()
         {
-            treeView1.Nodes.Clear();
-            TreeNode tn = new TreeNode("Root");
-            getTreenode(tn,basepath);
-            AddNode(tn, null);
+            if (!ranOnce)
+            {
+                ranOnce = true;
+                treeView1.Nodes.Clear();
+                TreeNode tn = new TreeNode("Root");
+                getTreenode(tn, basepath);
+                AddNode(tn, null);
+            }
            
         }
 
@@ -48,63 +54,51 @@ namespace Hakchi_HelpingHand
 
         private void LiveGameBrowser_FormClosing(object sender, FormClosingEventArgs e)
         {
-            conn.Disconnect();
-            conn.Dispose();
+         
         }
 
         private void getTreenode(TreeNode tn , string path)
         {
             tn.Nodes.Clear();
-            string[] subs = listFolder(path);
-            for (int x = 1; x < subs.Length; x++)
+            ClovershellWrapper.FolderDetail fd = ClovershellWrapper.getInstance().GetFolderDetail(path);
+         
+            for (int x = 1; x < fd.Folders.Count(); x++)
             {
 
-                string s = subs[x];
-                string filename = s.Substring(57);
-                if (filename != "." && filename != ".." && filename.ToLower().StartsWith("clv"))
+                string s = fd.Folders[x];
+                if (s.ToLower().StartsWith("clv"))
                 {
-                    
-                    if (s[0] == 'd')
+                    BasicInfo bi = getFolderName(path + s + "/" + s + ".desktop");
+                    TreeNode c = new TreeNode(bi.name);
+
+
+                    tn.Nodes.Add(c);
+                    if (bi.exec.StartsWith("/bin/chmenu"))
                     {
-
-                        BasicInfo bi = getFolderName(path + filename + "/" + filename + ".desktop");
-                        TreeNode c = new TreeNode(bi.name);
-                         
-
-                        tn.Nodes.Add(c);
-                        if (bi.exec.StartsWith("/bin/chmenu"))
-                        {
-                            c.Tag = basepath + bi.exec.Replace("/bin/chmenu ", "").Trim() + "/";
-                            c.ImageIndex = 1;
-                            c.SelectedImageIndex = 1;
+                        c.Tag = basepath + bi.exec.Replace("/bin/chmenu ", "").Trim() + "/";
+                        c.ImageIndex = 1;
+                        c.SelectedImageIndex = 1;
                         /*    if (bi.name != "Back")
                             {
                                 getTreenode(c, basepath + bi.exec.Replace("/bin/chmenu ", "").Trim() + "/");
                             }*/
-                        }
-                        else
-                        {
-                            c.Tag = path + filename;
-                            c.ImageIndex = 0;
-                            c.SelectedImageIndex = 0;
-                        }
-                        //         ProcessTreeNode(c);
                     }
                     else
                     {
-                    /*   */
+                        c.Tag = path + s;
+                        c.ImageIndex = 0;
+                        c.SelectedImageIndex = 0;
                     }
                 }
+                        //         ProcessTreeNode(c);
+                 
             }
         }
         private BasicInfo getFolderName(string path)
         {
-            System.IO.MemoryStream ms = new System.IO.MemoryStream();
-            conn.Execute("cat " + path, null, ms, null, 15000, false);
-            ms.Seek(0, System.IO.SeekOrigin.Begin);
-            System.IO.TextReader rdr = new System.IO.StreamReader(ms);
-            string s = rdr.ReadToEnd();
-            rdr.Close();
+           
+            string s = ClovershellWrapper.getInstance().GetFileAsString(path);
+
             string[] splitted = s.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
             BasicInfo bi = new BasicInfo();
             foreach(string ss in splitted)
@@ -125,25 +119,7 @@ namespace Hakchi_HelpingHand
             public string name;
             public string exec;
         }
-        private string[] listFolder(string path)
-        {
-            string command = "ls -al " + path;
-        
-            try
-            {
-
-                var result = conn.ExecuteSimple(command, 5000, true);
-                string[] allLogs = result.Split(new string[] { "\n" }, StringSplitOptions.None);
-              
-                return allLogs;
-            }
-            catch (Exception exc)
-            {
-               
-                return new string[] { "" };
-            }
-
-        }
+      
 
         private void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {

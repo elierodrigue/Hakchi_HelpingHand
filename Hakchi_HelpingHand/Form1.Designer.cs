@@ -40,18 +40,30 @@
             this.clovershellToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.filebrowserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gameBrowserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.liveScreenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
             this.txtNesParam = new System.Windows.Forms.TextBox();
-            this.button5 = new System.Windows.Forms.Button();
-            this.liveScreenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.chkGameClearingFix = new System.Windows.Forms.CheckBox();
+            this.txtAvailableSpace = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 26);
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.Location = new System.Drawing.Point(6, 19);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(502, 52);
+            this.button1.Size = new System.Drawing.Size(361, 52);
             this.button1.TabIndex = 0;
             this.button1.Text = "1 - Compress all games";
             this.button1.UseVisualStyleBackColor = true;
@@ -59,9 +71,11 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(12, 84);
+            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.button3.Location = new System.Drawing.Point(6, 77);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(502, 52);
+            this.button3.Size = new System.Drawing.Size(361, 52);
             this.button3.TabIndex = 2;
             this.button3.Text = "2 - Distinguish duplicate games";
             this.button3.UseVisualStyleBackColor = true;
@@ -71,16 +85,18 @@
             // 
             this.lstLog.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.lstLog.FormattingEnabled = true;
-            this.lstLog.Location = new System.Drawing.Point(0, 393);
+            this.lstLog.Location = new System.Drawing.Point(0, 332);
             this.lstLog.Name = "lstLog";
-            this.lstLog.Size = new System.Drawing.Size(526, 160);
+            this.lstLog.Size = new System.Drawing.Size(1166, 160);
             this.lstLog.TabIndex = 4;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(12, 142);
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.button2.Location = new System.Drawing.Point(6, 135);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(502, 52);
+            this.button2.Size = new System.Drawing.Size(361, 52);
             this.button2.TabIndex = 5;
             this.button2.Text = "3 - Cleanup Name";
             this.button2.UseVisualStyleBackColor = true;
@@ -88,9 +104,11 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(12, 200);
+            this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.button4.Location = new System.Drawing.Point(6, 193);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(502, 52);
+            this.button4.Size = new System.Drawing.Size(361, 52);
             this.button4.TabIndex = 6;
             this.button4.Text = "4 - Fix rom names and rebuild NES Command";
             this.button4.UseVisualStyleBackColor = true;
@@ -103,7 +121,7 @@
             this.toolToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(526, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1166, 24);
             this.menuStrip1.TabIndex = 7;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -136,28 +154,35 @@
             // clovershellToolStripMenuItem
             // 
             this.clovershellToolStripMenuItem.Name = "clovershellToolStripMenuItem";
-            this.clovershellToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.clovershellToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.clovershellToolStripMenuItem.Text = "Clovershell";
             this.clovershellToolStripMenuItem.Click += new System.EventHandler(this.clovershellToolStripMenuItem_Click);
             // 
             // filebrowserToolStripMenuItem
             // 
             this.filebrowserToolStripMenuItem.Name = "filebrowserToolStripMenuItem";
-            this.filebrowserToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.filebrowserToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.filebrowserToolStripMenuItem.Text = "Filebrowser";
             this.filebrowserToolStripMenuItem.Click += new System.EventHandler(this.filebrowserToolStripMenuItem_Click);
             // 
             // gameBrowserToolStripMenuItem
             // 
             this.gameBrowserToolStripMenuItem.Name = "gameBrowserToolStripMenuItem";
-            this.gameBrowserToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.gameBrowserToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.gameBrowserToolStripMenuItem.Text = "Game browser";
             this.gameBrowserToolStripMenuItem.Click += new System.EventHandler(this.gameBrowserToolStripMenuItem_Click);
+            // 
+            // liveScreenToolStripMenuItem
+            // 
+            this.liveScreenToolStripMenuItem.Name = "liveScreenToolStripMenuItem";
+            this.liveScreenToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.liveScreenToolStripMenuItem.Text = "Live Screen";
+            this.liveScreenToolStripMenuItem.Click += new System.EventHandler(this.liveScreenToolStripMenuItem_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 266);
+            this.label1.Location = new System.Drawing.Point(12, 259);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(148, 13);
             this.label1.TabIndex = 9;
@@ -165,47 +190,125 @@
             // 
             // txtNesParam
             // 
-            this.txtNesParam.Location = new System.Drawing.Point(163, 263);
+            this.txtNesParam.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtNesParam.Location = new System.Drawing.Point(166, 256);
             this.txtNesParam.Name = "txtNesParam";
-            this.txtNesParam.Size = new System.Drawing.Size(351, 20);
+            this.txtNesParam.Size = new System.Drawing.Size(201, 20);
             this.txtNesParam.TabIndex = 10;
             // 
-            // button5
+            // progressBar1
             // 
-            this.button5.Location = new System.Drawing.Point(12, 289);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(502, 52);
-            this.button5.TabIndex = 11;
-            this.button5.Text = "5 - Apply cache clearing fix";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.progressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.progressBar1.Location = new System.Drawing.Point(6, 253);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(339, 23);
+            this.progressBar1.TabIndex = 12;
             // 
-            // liveScreenToolStripMenuItem
+            // groupBox1
             // 
-            this.liveScreenToolStripMenuItem.Name = "liveScreenToolStripMenuItem";
-            this.liveScreenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.liveScreenToolStripMenuItem.Text = "Live Screen";
-            this.liveScreenToolStripMenuItem.Click += new System.EventHandler(this.liveScreenToolStripMenuItem_Click);
+            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Controls.Add(this.button3);
+            this.groupBox1.Controls.Add(this.button2);
+            this.groupBox1.Controls.Add(this.txtNesParam);
+            this.groupBox1.Controls.Add(this.button4);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Location = new System.Drawing.Point(12, 27);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(373, 284);
+            this.groupBox1.TabIndex = 13;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Software Database";
+            this.groupBox1.UseCompatibleTextRendering = true;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.button7);
+            this.groupBox2.Controls.Add(this.button6);
+            this.groupBox2.Location = new System.Drawing.Point(391, 27);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(406, 284);
+            this.groupBox2.TabIndex = 14;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "NES Classic Operations";
+            // 
+            // button7
+            // 
+            this.button7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.button7.Location = new System.Drawing.Point(6, 77);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(394, 52);
+            this.button7.TabIndex = 1;
+            this.button7.Text = "Back Folder Picture Optimisation";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Visible = false;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // button6
+            // 
+            this.button6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.button6.Location = new System.Drawing.Point(6, 19);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(394, 52);
+            this.button6.TabIndex = 0;
+            this.button6.Text = "Apply savegame clearing fix";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.chkGameClearingFix);
+            this.groupBox3.Controls.Add(this.txtAvailableSpace);
+            this.groupBox3.Controls.Add(this.progressBar1);
+            this.groupBox3.Location = new System.Drawing.Point(803, 27);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(351, 284);
+            this.groupBox3.TabIndex = 15;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "NES Mini Info";
+            // 
+            // chkGameClearingFix
+            // 
+            this.chkGameClearingFix.AutoSize = true;
+            this.chkGameClearingFix.Enabled = false;
+            this.chkGameClearingFix.Location = new System.Drawing.Point(6, 19);
+            this.chkGameClearingFix.Name = "chkGameClearingFix";
+            this.chkGameClearingFix.Size = new System.Drawing.Size(170, 17);
+            this.chkGameClearingFix.TabIndex = 14;
+            this.chkGameClearingFix.Text = "Save game clearing fix applied";
+            this.chkGameClearingFix.UseVisualStyleBackColor = true;
+            // 
+            // txtAvailableSpace
+            // 
+            this.txtAvailableSpace.Location = new System.Drawing.Point(6, 237);
+            this.txtAvailableSpace.Name = "txtAvailableSpace";
+            this.txtAvailableSpace.Size = new System.Drawing.Size(339, 13);
+            this.txtAvailableSpace.TabIndex = 13;
+            this.txtAvailableSpace.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(526, 553);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.txtNesParam);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button2);
+            this.ClientSize = new System.Drawing.Size(1166, 492);
+            this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.lstLog);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
-            this.Text = "Hakchi Helping Hand 1.1";
+            this.Text = "Hakchi Helping Hand 1.2";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -229,6 +332,14 @@
         private System.Windows.Forms.ToolStripMenuItem gameBrowserToolStripMenuItem;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.ToolStripMenuItem liveScreenToolStripMenuItem;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Label txtAvailableSpace;
+        private System.Windows.Forms.CheckBox chkGameClearingFix;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button7;
     }
 }
 

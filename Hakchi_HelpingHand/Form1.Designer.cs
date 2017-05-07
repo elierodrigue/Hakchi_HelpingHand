@@ -51,10 +51,21 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.chkGameClearingFix = new System.Windows.Forms.CheckBox();
             this.txtAvailableSpace = new System.Windows.Forms.Label();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.lblNbGames = new System.Windows.Forms.Label();
+            this.nudNbGames = new System.Windows.Forms.NumericUpDown();
+            this.nudCompressedGames = new System.Windows.Forms.NumericUpDown();
+            this.label2 = new System.Windows.Forms.Label();
+            this.nudInvalidGames = new System.Windows.Forms.NumericUpDown();
+            this.label3 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudNbGames)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCompressedGames)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudInvalidGames)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -201,7 +212,7 @@
             // 
             this.progressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.progressBar1.Location = new System.Drawing.Point(6, 253);
+            this.progressBar1.Location = new System.Drawing.Point(6, 73);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(339, 23);
             this.progressBar1.TabIndex = 12;
@@ -265,7 +276,7 @@
             this.groupBox3.Controls.Add(this.progressBar1);
             this.groupBox3.Location = new System.Drawing.Point(803, 27);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(351, 284);
+            this.groupBox3.Size = new System.Drawing.Size(351, 104);
             this.groupBox3.TabIndex = 15;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "NES Mini Info";
@@ -289,11 +300,93 @@
             this.txtAvailableSpace.TabIndex = 13;
             this.txtAvailableSpace.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.nudInvalidGames);
+            this.groupBox4.Controls.Add(this.label3);
+            this.groupBox4.Controls.Add(this.nudCompressedGames);
+            this.groupBox4.Controls.Add(this.label2);
+            this.groupBox4.Controls.Add(this.nudNbGames);
+            this.groupBox4.Controls.Add(this.lblNbGames);
+            this.groupBox4.Location = new System.Drawing.Point(803, 137);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(351, 174);
+            this.groupBox4.TabIndex = 16;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Hakchi Database Info";
+            // 
+            // lblNbGames
+            // 
+            this.lblNbGames.AutoSize = true;
+            this.lblNbGames.Location = new System.Drawing.Point(6, 16);
+            this.lblNbGames.Name = "lblNbGames";
+            this.lblNbGames.Size = new System.Drawing.Size(99, 13);
+            this.lblNbGames.TabIndex = 0;
+            this.lblNbGames.Text = "Number of games : ";
+            // 
+            // nudNbGames
+            // 
+            this.nudNbGames.Enabled = false;
+            this.nudNbGames.Location = new System.Drawing.Point(111, 14);
+            this.nudNbGames.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.nudNbGames.Name = "nudNbGames";
+            this.nudNbGames.Size = new System.Drawing.Size(120, 20);
+            this.nudNbGames.TabIndex = 1;
+            // 
+            // nudCompressedGames
+            // 
+            this.nudCompressedGames.Enabled = false;
+            this.nudCompressedGames.Location = new System.Drawing.Point(111, 40);
+            this.nudCompressedGames.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.nudCompressedGames.Name = "nudCompressedGames";
+            this.nudCompressedGames.Size = new System.Drawing.Size(120, 20);
+            this.nudCompressedGames.TabIndex = 3;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 42);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(108, 13);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Compressed games : ";
+            // 
+            // nudInvalidGames
+            // 
+            this.nudInvalidGames.Enabled = false;
+            this.nudInvalidGames.Location = new System.Drawing.Point(111, 66);
+            this.nudInvalidGames.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.nudInvalidGames.Name = "nudInvalidGames";
+            this.nudInvalidGames.Size = new System.Drawing.Size(120, 20);
+            this.nudInvalidGames.TabIndex = 5;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 68);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(81, 13);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Invalid games : ";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1166, 492);
+            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -309,6 +402,11 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudNbGames)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCompressedGames)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudInvalidGames)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -340,6 +438,13 @@
         private System.Windows.Forms.CheckBox chkGameClearingFix;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.NumericUpDown nudNbGames;
+        private System.Windows.Forms.Label lblNbGames;
+        private System.Windows.Forms.NumericUpDown nudInvalidGames;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.NumericUpDown nudCompressedGames;
+        private System.Windows.Forms.Label label2;
     }
 }
 

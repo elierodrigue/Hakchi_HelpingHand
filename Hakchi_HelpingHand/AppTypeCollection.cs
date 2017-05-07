@@ -24,7 +24,7 @@ namespace Hakchi_HelpingHand
             {
                 Class = typeof(com.clusterrr.hakchi_gui.NesGame),
                 Extensions = new string[] {".nes", ".unf", ".unif"},
-                DefaultApps = new string[] {"/usr/bin/clover-kachikachi","/bin/clover-kachikachi","/bin/clover-kachikachi-wr"},
+                DefaultApps = new string[] {"/bin/nes","/usr/bin/clover-kachikachi","/bin/clover-kachikachi","/bin/clover-kachikachi-wr"},
                 Prefix = 'H'
             },
         /*    new AppInfo
@@ -140,9 +140,15 @@ namespace Hakchi_HelpingHand
         public static AppInfo GetAppByExec(string exec)
         {
             foreach (var app in ApplicationTypes)
-                foreach (var cmd in app.DefaultApps)
-                    if (exec.StartsWith(cmd + " "))
-                        return app;
+            {
+                if (app.Class !=typeof( com.clusterrr.hakchi_gui.NesGame))
+
+                {
+                    foreach (var cmd in app.DefaultApps)
+                        if (exec.StartsWith(cmd + " "))
+                            return app;
+                }
+            }
             return null;
         }
         public static AppInfo GetAppByType(Type theType)

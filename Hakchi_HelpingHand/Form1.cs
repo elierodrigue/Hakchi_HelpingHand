@@ -43,6 +43,7 @@ namespace Hakchi_HelpingHand
             this.FormClosing += Form1_FormClosing;
             progressBar1.Minimum = 0;
             progressBar1.Maximum = 100;
+            RefreshHakchiInfo();
         }
 
     
@@ -62,13 +63,62 @@ namespace Hakchi_HelpingHand
 
         public void RefreshInfo()
         {
-           
+            /*refresh nes classic info*/
             string file = ClovershellWrapper.getInstance().GetFileAsString("/var/lib/hakchi/rootfs/bin/chmenu");
 
             NesClassicInfo ret = new NesClassicInfo();
             ret.GameClearingFixApplied = file.Contains("#CLEANSAVEDGAMEFOLDER");
 
             RefreshNESClassicInfoUI(ret, null);
+        }
+        List<NesMiniApplication> hakchiGames = new List<NesMiniApplication>();
+        public void RefreshHakchiInfo()
+        {
+
+            hakchiGames.Clear();
+            var gameDirs = Directory.GetDirectories(Path.Combine(runningFolder, "games"));
+            int nbGames = 0;
+            int nbCompressedGames = 0;
+            int invalidGames = 0;
+            foreach (var gameDir in gameDirs)
+            {
+                try
+                {
+                    nbGames++;
+                    // Removing empty directories without errors
+                    try
+                    {
+                        var game = NesMiniApplication.FromDirectory(gameDir);
+                        if ((System.IO.Directory.GetFiles(game.GamePath, "*.7z").Length > 0))
+                        {
+                            nbCompressedGames++;
+                        }
+                        else
+                        {
+                            AddLog(game.Name + " is not compressed");
+                           
+                        }
+                        hakchiGames.Add(game);
+
+                    }
+                    catch (FileNotFoundException ex) // Remove bad directories if any
+                    {
+                        invalidGames++;
+                       // Directory.Delete(gameDir, true);
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                 
+                    continue;
+                }
+            }
+            nudNbGames.Value = nbGames;
+            nudCompressedGames.Value = nbCompressedGames;
+            nudInvalidGames.Value = invalidGames;
+          
+
         }
         public class NesClassicInfo
         {
@@ -442,6 +492,7 @@ namespace Hakchi_HelpingHand
         {
             AddLog("Compression sequence done",null);
             Enable();
+            RefreshHakchiInfo();
         }
 
         private void CompressWorker_DoWork(object sender, DoWorkEventArgs e)

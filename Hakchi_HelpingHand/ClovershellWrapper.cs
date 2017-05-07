@@ -29,7 +29,14 @@ namespace Hakchi_HelpingHand
         }
         public void Disconnect()
         {
-            conn.Disconnect();
+            try
+            {
+                conn.Disconnect();
+            }
+            catch (Exception exc)
+            {
+               
+            }
             conn.Dispose();
         }
         public FolderDetail GetFolderDetail(string path)

@@ -52,20 +52,20 @@
             this.chkGameClearingFix = new System.Windows.Forms.CheckBox();
             this.txtAvailableSpace = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.lblNbGames = new System.Windows.Forms.Label();
-            this.nudNbGames = new System.Windows.Forms.NumericUpDown();
-            this.nudCompressedGames = new System.Windows.Forms.NumericUpDown();
-            this.label2 = new System.Windows.Forms.Label();
             this.nudInvalidGames = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
+            this.nudCompressedGames = new System.Windows.Forms.NumericUpDown();
+            this.label2 = new System.Windows.Forms.Label();
+            this.nudNbGames = new System.Windows.Forms.NumericUpDown();
+            this.lblNbGames = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudNbGames)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudCompressedGames)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudInvalidGames)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCompressedGames)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudNbGames)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -294,7 +294,9 @@
             // 
             // txtAvailableSpace
             // 
-            this.txtAvailableSpace.Location = new System.Drawing.Point(6, 237);
+            this.txtAvailableSpace.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtAvailableSpace.Location = new System.Drawing.Point(6, 58);
             this.txtAvailableSpace.Name = "txtAvailableSpace";
             this.txtAvailableSpace.Size = new System.Drawing.Size(339, 13);
             this.txtAvailableSpace.TabIndex = 13;
@@ -315,27 +317,27 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Hakchi Database Info";
             // 
-            // lblNbGames
+            // nudInvalidGames
             // 
-            this.lblNbGames.AutoSize = true;
-            this.lblNbGames.Location = new System.Drawing.Point(6, 16);
-            this.lblNbGames.Name = "lblNbGames";
-            this.lblNbGames.Size = new System.Drawing.Size(99, 13);
-            this.lblNbGames.TabIndex = 0;
-            this.lblNbGames.Text = "Number of games : ";
-            // 
-            // nudNbGames
-            // 
-            this.nudNbGames.Enabled = false;
-            this.nudNbGames.Location = new System.Drawing.Point(111, 14);
-            this.nudNbGames.Maximum = new decimal(new int[] {
+            this.nudInvalidGames.Enabled = false;
+            this.nudInvalidGames.Location = new System.Drawing.Point(111, 66);
+            this.nudInvalidGames.Maximum = new decimal(new int[] {
             1000000,
             0,
             0,
             0});
-            this.nudNbGames.Name = "nudNbGames";
-            this.nudNbGames.Size = new System.Drawing.Size(120, 20);
-            this.nudNbGames.TabIndex = 1;
+            this.nudInvalidGames.Name = "nudInvalidGames";
+            this.nudInvalidGames.Size = new System.Drawing.Size(120, 20);
+            this.nudInvalidGames.TabIndex = 5;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 68);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(81, 13);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Invalid games : ";
             // 
             // nudCompressedGames
             // 
@@ -359,27 +361,27 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "Compressed games : ";
             // 
-            // nudInvalidGames
+            // nudNbGames
             // 
-            this.nudInvalidGames.Enabled = false;
-            this.nudInvalidGames.Location = new System.Drawing.Point(111, 66);
-            this.nudInvalidGames.Maximum = new decimal(new int[] {
+            this.nudNbGames.Enabled = false;
+            this.nudNbGames.Location = new System.Drawing.Point(111, 14);
+            this.nudNbGames.Maximum = new decimal(new int[] {
             1000000,
             0,
             0,
             0});
-            this.nudInvalidGames.Name = "nudInvalidGames";
-            this.nudInvalidGames.Size = new System.Drawing.Size(120, 20);
-            this.nudInvalidGames.TabIndex = 5;
+            this.nudNbGames.Name = "nudNbGames";
+            this.nudNbGames.Size = new System.Drawing.Size(120, 20);
+            this.nudNbGames.TabIndex = 1;
             // 
-            // label3
+            // lblNbGames
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 68);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(81, 13);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Invalid games : ";
+            this.lblNbGames.AutoSize = true;
+            this.lblNbGames.Location = new System.Drawing.Point(6, 16);
+            this.lblNbGames.Name = "lblNbGames";
+            this.lblNbGames.Size = new System.Drawing.Size(99, 13);
+            this.lblNbGames.TabIndex = 0;
+            this.lblNbGames.Text = "Number of games : ";
             // 
             // Form1
             // 
@@ -404,9 +406,9 @@
             this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudNbGames)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudCompressedGames)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudInvalidGames)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCompressedGames)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudNbGames)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
